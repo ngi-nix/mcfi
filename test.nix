@@ -1,6 +1,7 @@
 { self, inputs, nixpkgs, system }:
 
-with import (nixpkgs + "/nixos/lib/testing-python.nix") {
+with import (nixpkgs + "/nixos/lib/testing-python.nix")
+{
   inherit system;
 };
 

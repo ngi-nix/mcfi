@@ -91,7 +91,7 @@
                 --bind 0.0.0.0:9000 \
                 --pythonpath ${mcfi} \
                 mcfi:application
-              '';
+            '';
 
             StateDirectory = "mcfi";
             WorkingDirectory = "/var/lib/mcfi";
@@ -103,17 +103,17 @@
         };
       };
 
-      checks = forAllSystems (system: 
-      with nixpkgsFor.${system};
+      checks = forAllSystems (system:
+        with nixpkgsFor.${system};
 
-      {
-        inherit (self.packages.${system})
-          mcfi-env
-          mcfi-post-receive
-          ;
-      } // lib.optionalAttrs stdenv.isLinux {
-        # A VM test of the NixOS module.
-        vmTest = import ./test.nix { inherit self inputs nixpkgs system; };
-      });
+        {
+          inherit (self.packages.${system})
+            mcfi-env
+            mcfi-post-receive
+            ;
+        } // lib.optionalAttrs stdenv.isLinux {
+          # A VM test of the NixOS module.
+          vmTest = import ./test.nix { inherit self inputs nixpkgs system; };
+        });
     };
 }
