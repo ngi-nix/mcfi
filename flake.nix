@@ -20,8 +20,7 @@
   outputs = { self, mach-nix, mcfi, nixpkgs, ... } @ inputs:
     let
       version = builtins.substring 0 8 mcfi.lastModifiedDate;
-      #supportedSystems = [ "x86_64-linux" "x86_64-darwin" ];
-      supportedSystems = [ "x86_64-linux" ];
+      supportedSystems = [ "x86_64-linux" "x86_64-darwin" ];
       forAllSystems = f: nixpkgs.lib.genAttrs supportedSystems (system: f system);
       nixpkgsFor = forAllSystems (system: import nixpkgs {
         inherit system;
